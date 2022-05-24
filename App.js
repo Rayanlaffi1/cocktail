@@ -1,11 +1,22 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-
+import { StyleSheet,ScrollView, Text, View } from 'react-native';
+import Cocktail from "./composants/Cocktail.js";
+import {useState, useEffect} from "react";
 export default function App() {
+
+  const [apiResult, setApiResultat] = useState(null);
+  var api = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=b";
+  useEffect(() => {
+    fetch(api).then((response) => response.json()).then( response => { console.log(response); setApiResultat(response.drinks);  } )
+  },[])
+
+  
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <StatusBar style="auto" />
+      <ScrollView style={styles.containerScrollView}>
+        {apiResult &&  apiResult.map( (result) =>  (<Cocktail ImageURL={result.strDrinkThumb} description={result.strDrink} />) ) }
+      </ScrollView>
     </View>
   );
 }
@@ -16,5 +27,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  containerScrollView: {
+    flex: 1,
+    marginTop: 40,
+    marginBottom: 40,
   },
 });

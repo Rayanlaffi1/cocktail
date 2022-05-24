@@ -7,10 +7,9 @@ export default function App() {
   const [apiResult, setApiResultat] = useState(null);
   var api = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=b";
   useEffect(() => {
-    fetch(api).then((response) => response.json()).then( response => { console.log(response); setApiResultat(response.drinks);  } )
+    fetch(api).then((response) => response.json()).then( response => { setApiResultat(response.drinks);  } )
   },[])
 
-  
   return (
     <View style={styles.container}>
     <StatusBar style="auto" />

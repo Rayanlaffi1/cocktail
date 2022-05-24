@@ -3,11 +3,11 @@ import {useState, useEffect} from "react";
 const Cocktail = ({ImageURL, description}) => {
   return (
       <View style={styles.main}>
+      <Text style={styles.borderTexte}>Nom: <Text style={{ fontWeight: 'normal' }}> {description} </Text></Text>
         <Image
             style={styles.borderImage}
             source={{uri:ImageURL}}
         />
-        <Text style={styles.borderTexte}>Description: <Text style={{ fontWeight: 'normal' }}> {description} </Text></Text>
       </View>
   );
 }
@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
         fontWeight:'bold', borderWidth: 2,borderColor:'black',padding:5
     },
     borderImage: {
-        height: 100,borderWidth: 2,borderColor:'black'
+        height: 100,borderWidth: 2,borderColor:'black',marginBottom:5,
     },
   
 });

@@ -1,35 +1,24 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet,ScrollView, Text, View } from 'react-native';
-import Cocktail from "./composants/Cocktail.js";
-import {useState, useEffect} from "react";
+import HomeScreen from "./screens/HomeScreen.js";
+import DetailsScreen from "./screens/DetailsScreen.js";
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 export default function App() {
-
-  const [apiResult, setApiResultat] = useState(null);
-  var api = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=b";
-  useEffect(() => {
-    fetch(api).then((response) => response.json()).then( response => { setApiResultat(response.drinks);  } )
-  },[])
-
+  const Stack = createNativeStackNavigator();
   return (
-    <View style={styles.container}>
-    <StatusBar style="auto" />
-      <ScrollView style={styles.containerScrollView}>
-        {apiResult &&  apiResult.map( (result) =>  (<Cocktail ImageURL={result.strDrinkThumb} description={result.strDrink} />) ) }
-      </ScrollView>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{ title: 'Cocktails' }}
+        />
+        <Stack.Screen
+          name="Details"
+          component={DetailsScreen}
+          options={{ title: 'Details' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  containerScrollView: {
-    flex: 1,
-    marginTop: 40,
-    marginBottom: 40,
-  },
-});

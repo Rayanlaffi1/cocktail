@@ -1,6 +1,6 @@
 import { StyleSheet,ActivityIndicator,Button,Image,Text, View} from 'react-native';
 import {useState, useEffect} from "react";
-const Cocktail = ({ImageURL, description}) => {
+const Cocktail = ({ImageURL, description }) => {
   return (
       <View style={styles.main}>
       <Text style={styles.borderTexte}>Nom: <Text style={{ fontWeight: 'normal' }}> {description} </Text></Text>
